@@ -1,13 +1,15 @@
-import pygame
 import sys
+from Classes import *
 
 # Init
 pygame.init()
-WIDTH, HEIGHT = 640, 360
-screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
+SCREENWIDTH, SCREENHEIGHT = 640, 360
+screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
 clock = pygame.time.Clock()
+narwhal1 = Narwhal(0, 50, 261, 92, "images/single_narwhal.png")
+narwhal2 = Narwhal(0, 150, 261, 92, "images/single_narwhal.png")
+narwhal2 = Narwhal(0, 250, 261, 92, "images/single_narwhal.png")
 FPS = 24
-img_narwhal = pygame.image.load("single_narwhal.png")
 
 # Colors
 clr1 = (123, 23, 34)
@@ -24,13 +26,15 @@ while True:
             sys.exit()
 
     # Logic
+    narwhal1.motion()
+    narwhal2.motion()
     changing_color += 10
     if changing_color >= 255:
         changing_color %= 255
 
     # Draw
     screen.fill((changing_color, 40, 243))
-    screen.blit(img_narwhal, (200, 200))
+    BaseClass.all_sprites.draw(screen)
     # Flip y-axis
     pygame.display.flip()
 

@@ -6,8 +6,20 @@ class BaseClass(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         BaseClass.all_sprites.add(self)
         self.image = pygame.image.load(image_string)
-        self.rect = pygame.image.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.width = width
         self.height = height
+
+
+class Narwhal(BaseClass):
+    Narwhals = pygame.sprite.Group()
+    def __init__(self, x, y, width, height, image_string):
+        BaseClass.__init__(self, x, y, width, height, image_string)
+        Narwhal.Narwhals.add(self)
+        self.velx = 3
+    def motion(self):
+        self.rect.x += self.velx
+
+
