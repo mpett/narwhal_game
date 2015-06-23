@@ -3,7 +3,7 @@ import sys
 
 # Init
 pygame.init()
-WIDTH, HEIGHT = 640,360
+WIDTH, HEIGHT = 640, 360
 screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
 clock = pygame.time.Clock()
 FPS = 24
@@ -15,7 +15,7 @@ clr2 = (55, 233, 12)
 clr3 = (25, 44, 123)
 changing_color = 0
 
-# Main game loop
+# ----------- Main game loop -----------
 while True:
     # Processes
     for event in pygame.event.get():
@@ -36,3 +36,4 @@ while True:
 
     # Clock
     clock.tick(FPS)
+# ----------- Main game loop -----------
