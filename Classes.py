@@ -15,10 +15,10 @@ class BaseClass(pygame.sprite.Sprite):
 
 class Narwhal(BaseClass):
     Narwhals = pygame.sprite.Group()
-    def __init__(self, x, y, width, height, image_string):
+    def __init__(self, x, y, width, height, image_string, velocity):
         BaseClass.__init__(self, x, y, width, height, image_string)
         Narwhal.Narwhals.add(self)
-        self.velx = 3
+        self.velx = 2
     def motion(self):
         self.rect.x += self.velx
 
