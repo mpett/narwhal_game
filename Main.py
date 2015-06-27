@@ -3,7 +3,7 @@ from process import process
 
 # Init
 pygame.init()
-SCREENWIDTH, SCREENHEIGHT = 640, 360
+SCREENWIDTH, SCREENHEIGHT = 1280, 720
 screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
 clock = pygame.time.Clock()
 narwhal1 = Narwhal(0, SCREENHEIGHT - 90, 261, 92, "images/single_narwhal.png", 7)
@@ -19,8 +19,9 @@ changing_color = 0
 while True:
     # Processes
     process(narwhal1)
+
     # Logic
-    narwhal1.motion()
+    narwhal1.motion(SCREENWIDTH)
     changing_color += 10
     if changing_color >= 255:
         changing_color %= 255
@@ -28,6 +29,7 @@ while True:
     # Draw
     screen.fill((changing_color, 40, 243))
     BaseClass.all_sprites.draw(screen)
+
     # Flip y-axis
     pygame.display.flip()
 

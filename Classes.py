@@ -12,14 +12,20 @@ class BaseClass(pygame.sprite.Sprite):
         self.width = width
         self.height = height
 
-
 class Narwhal(BaseClass):
     Narwhals = pygame.sprite.Group()
     def __init__(self, x, y, width, height, image_string, velocity):
         BaseClass.__init__(self, x, y, width, height, image_string)
         Narwhal.Narwhals.add(self)
-        self.velx = 2
-    def motion(self):
+        self.velx = 0
+        self.vely = 0
+    def motion(self, SCREENWIDTH):
+        predicted_location = self.rect.x + self.velx
+        if predicted_location < 0:
+            self.velx = 0
+        elif predicted_location + self.width > SCREENWIDTH:
+            self.velx = 0
         self.rect.x += self.velx
+        self.rect.y += self.vely
 
 

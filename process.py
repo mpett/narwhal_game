@@ -10,9 +10,14 @@ def process(narwhal):
 
     if keys[pygame.K_d]:
         narwhal.image = pygame.image.load("images/single_narwhal.png")
-        narwhal.velx = 5
+        narwhal.velx = 15
     elif keys[pygame.K_a]:
         narwhal.image = pygame.image.load("images/single_narwhal_flipped.png")
-        narwhal.velx = -5
+        narwhal.velx = -15
+    elif keys[pygame.K_s]:
+        narwhal.vely = 15
+    elif keys[pygame.K_w]:
+        narwhal.vely = -15
     else:
         narwhal.velx = 0
+        narwhal.vely = 0
