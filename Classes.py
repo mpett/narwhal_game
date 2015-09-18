@@ -28,4 +28,8 @@ class Narwhal(BaseClass):
         self.rect.x += self.velx
         self.rect.y += self.vely
 
-
+class HelmetFish(BaseClass):
+    List = pygame.sprite.Group()
+    def __init__(self, x, y, width, height, image_string):
+        BaseClass.__init__(self, x, y, width, height, image_string)
+        HelmetFish.List.add(self)

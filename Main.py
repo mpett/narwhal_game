@@ -8,6 +8,7 @@ screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
 clock = pygame.time.Clock()
 background = pygame.image.load("images/underwater_background/background2.png")
 narwhal1 = Narwhal(0, SCREENHEIGHT - 90, 261, 92, "images/single_narwhal.png", 7)
+helmetfish = HelmetFish(40, 100, 78, 36, "images/helmetfish.png")
 FPS = 24
 
 # Colors
