@@ -6,6 +6,7 @@ pygame.init()
 SCREENWIDTH, SCREENHEIGHT = 1280, 720
 screen = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT), 0, 32)
 clock = pygame.time.Clock()
+background = pygame.image.load("images/underwater_background/background2.png")
 narwhal1 = Narwhal(0, SCREENHEIGHT - 90, 261, 92, "images/single_narwhal.png", 7)
 FPS = 24
 
@@ -22,12 +23,9 @@ while True:
 
     # Logic
     narwhal1.motion(SCREENWIDTH)
-    changing_color += 10
-    if changing_color >= 255:
-        changing_color %= 255
 
-    # Draw
-    screen.fill((changing_color, 40, 243))
+    #Draw
+    screen.blit(background, (0, 0))
     BaseClass.all_sprites.draw(screen)
 
     # Flip y-axis
