@@ -1,7 +1,7 @@
 import pygame
-import sys
+import sys, classes, random
 
-def process(narwhal):
+def process(narwhal, FPS, total_frames):
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -21,3 +21,14 @@ def process(narwhal):
     else:
         narwhal.velx = 0
         narwhal.vely = 0
+
+    spawn(FPS, total_frames)
+
+def spawn(FPS, total_frames):
+    four_seconds = FPS * 4
+    if total_frames % four_seconds == 0:
+        r = random.randint(1, 2)
+        x = 1
+        if r == 2:
+            x = 1280 - 78
+        helmetfish = classes.HelmetFish(x, 130, 78, 36, "images/helmetfish.png")

@@ -42,7 +42,7 @@ class HelmetFish(BaseClass):
         BaseClass.__init__(self, x, y, width, height, image_string)
         HelmetFish.List.add(self)
         self.velx = randint(1, 4)
-        self.amplitude, self.period = randint(20, 140), randint(4, 5) / 100.0
+        self.amplitude, self.period = randint(20, 120), randint(4, 6) / 100.0
 
     def swim(self, SCREENWIDTH):
         if self.rect.x + self.width > SCREENWIDTH or self.rect.x < 0:
