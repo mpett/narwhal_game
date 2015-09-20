@@ -33,6 +33,7 @@ while True:
     #Draw
     screen.blit(background, (0, 0))
     BaseClass.all_sprites.draw(screen)
+    Projectile.List.draw(screen)
 
     # Flip y-axis
     pygame.display.flip()
