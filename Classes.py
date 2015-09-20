@@ -19,6 +19,7 @@ class BaseClass(pygame.sprite.Sprite):
 
 class Narwhal(BaseClass):
     Narwhals = pygame.sprite.Group()
+    going_right = True
 
     def __init__(self, x, y, width, height, image_string, velocity):
         BaseClass.__init__(self, x, y, width, height, image_string)
@@ -42,16 +43,28 @@ class HelmetFish(BaseClass):
         BaseClass.__init__(self, x, y, width, height, image_string)
         HelmetFish.List.add(self)
         self.velx = randint(1, 4)
-        self.amplitude, self.period = randint(20, 120), randint(4, 6) / 100.0
+        self.amplitude, self.period = randint(20, 320), randint(4, 6) / 100.0
 
     def swim(self, SCREENWIDTH):
         if self.rect.x + self.width > SCREENWIDTH or self.rect.x < 0:
             self.image = pygame.transform.flip(self.image, True, False)
             self.velx = -self.velx
         self.rect.x += self.velx
-        self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 140
+        self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 340
 
     @staticmethod
     def movement(SCREENWIDTH):
         for fish in HelmetFish.List:
             fish.swim(SCREENWIDTH)
+
+class Projectile(BaseClass):
+    List = pygame.sprite.Group()
+    def __init__(self, x, y, height, width, image_string):
+        BaseClass.__init__(self, x , y, height, width, image_string)
+        Projectile.List.add(self)
+        self.velx = None
+
+    @staticmethod
+    def movement():
+        for projectile in Projectile.List:
+            projectile.rect.x += projectile.velx

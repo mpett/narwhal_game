@@ -27,6 +27,7 @@ while True:
     # Logic
     narwhal1.motion(SCREENWIDTH)
     HelmetFish.movement(SCREENWIDTH)
+    Projectile.movement()
     total_frames += 1
 
     #Draw
