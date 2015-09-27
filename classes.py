@@ -17,6 +17,11 @@ class BaseClass(pygame.sprite.Sprite):
         self.width = width
         self.height = height
 
+    def destroy(self, ClassName):
+        ClassName.List.remove(self)
+        BaseClass.all_sprites.remove(self)
+        del self
+
 class Narwhal(BaseClass):
     Narwhals = pygame.sprite.Group()
     going_right = True
@@ -42,8 +47,17 @@ class HelmetFish(BaseClass):
     def __init__(self, x, y, width, height, image_string):
         BaseClass.__init__(self, x, y, width, height, image_string)
         HelmetFish.List.add(self)
+        self.health = 100
+        self.half_health = self.health / 5.0
         self.velx = randint(1, 4)
         self.amplitude, self.period = randint(20, 320), randint(4, 6) / 100.0
+
+    @staticmethod
+    def update_all(SCREENWIDTH):
+        for helmetfish in HelmetFish.List:
+            helmetfish.swim(SCREENWIDTH)
+            if helmetfish.health <= 0:
+                helmetfish.destroy(HelmetFish)
 
     def swim(self, SCREENWIDTH):
         if self.rect.x + self.width > SCREENWIDTH or self.rect.x < 0:

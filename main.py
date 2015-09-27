@@ -1,5 +1,5 @@
 from classes import *
-from process import process
+from process import *
 
 # Init
 pygame.init()
@@ -9,9 +9,7 @@ clock = pygame.time.Clock()
 background = pygame.image.load("images/underwater_background/background2.png")
 narwhal1 = Narwhal(0, SCREENHEIGHT - 90, 261, 92, "images/single_narwhal.png", 7)
 helmetfish = HelmetFish(30, 100, 78, 36, "images/helmetfish.png")
-
 FPS = 24
-
 total_frames = 0
 
 # Colors
@@ -23,11 +21,14 @@ changing_color = 0
 # ----------- Main game loop -----------
 while True:
     # Processes
-    process(narwhal1, FPS, total_frames )
+    process(narwhal1, FPS, total_frames)
+
     # Logic
     narwhal1.motion(SCREENWIDTH)
     HelmetFish.movement(SCREENWIDTH)
     Projectile.movement()
+    collisions()
+    HelmetFish.update_all(SCREENWIDTH)
     total_frames += 1
 
     #Draw

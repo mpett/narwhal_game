@@ -32,8 +32,6 @@ def process(narwhal, FPS, total_frames):
         p.image = pygame.transform.flip(p.image, True, False)
         p.velx = -8
 
-
-
     spawn(FPS, total_frames)
 
 def spawn(FPS, total_frames):
@@ -43,4 +41,13 @@ def spawn(FPS, total_frames):
         x = 1
         if r == 2:
             x = 1280 - 78
-        helmetfish = classes.HelmetFish(x, 130, 78, 36, "images/helmetfish.png")
+        classes.HelmetFish(x, 130, 78, 36, "images/helmetfish.png")
+
+def collisions():
+    for helmetfish in classes.HelmetFish.List:
+        helemtfish_projectile = pygame.sprite.spritecollide(helmetfish, classes.Projectile.List, True)
+        if len(helemtfish_projectile) > 0:
+            for hit in helemtfish_projectile:
+                helmetfish.health -= helmetfish.half_health
+
+
