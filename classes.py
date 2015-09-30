@@ -97,3 +97,7 @@ class Projectile(pygame.sprite.Sprite):
     def movement():
         for projectile in Projectile.List:
             projectile.rect.x += projectile.velx
+
+    def destroy(self):
+        Projectile.List.remove(self)
+        del self

@@ -31,9 +31,9 @@ def process(narwhal, FPS, total_frames):
     if keys[pygame.K_SPACE]:
         def direction(p):
             if classes.Narwhal.going_right:
-                p.velx = 8
+                p.velx = 16
             else:
-                p.velx = -8
+                p.velx = -16
                 p.image = pygame.transform.flip(p.image, True, False)
 
         if classes.Projectile.fire and classes.Narwhal.going_right:
@@ -61,10 +61,22 @@ def spawn(FPS, total_frames):
         classes.HelmetFish(x, 130, "images/helmetfish.png")
 
 def collisions():
+
+    # freezing
+    # shooting problem
+
     for helmetfish in classes.HelmetFish.List:
-        helemtfish_projectile = pygame.sprite.spritecollide(helmetfish, classes.Projectile.List, True)
-        if len(helemtfish_projectile) > 0:
-            for hit in helemtfish_projectile:
+        if pygame.sprite.spritecollide(helmetfish, classes.Projectile.List, False):
+            if classes.Projectile.fire:
                 helmetfish.health -= helmetfish.half_health
+            else:
+                helmetfish.velx = 0
+                # image of frozen helmetfish
+
+    for projectile in classes.Projectile.List:
+        if pygame.sprite.spritecollide(projectile, classes.HelmetFish.List, False):
+            projectile.rect.x = 2 *- projectile.rect.width
+            projectile.destroy()
+
 
 
