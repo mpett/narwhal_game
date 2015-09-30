@@ -25,10 +25,10 @@ def process(narwhal, FPS, total_frames):
         narwhal.vely = 0
 
     if keys[pygame.K_SPACE] and classes.Narwhal.going_right == True:
-        p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, 60, 15, "images/projectiles/simple_shock.png")
+        p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, "images/projectiles/simple_shock.png")
         p.velx = 8
     elif keys[pygame.K_SPACE]:
-        p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, 60, 15, "images/projectiles/simple_shock.png")
+        p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, "images/projectiles/simple_shock.png")
         p.image = pygame.transform.flip(p.image, True, False)
         p.velx = -8
 
@@ -41,7 +41,7 @@ def spawn(FPS, total_frames):
         x = 1
         if r == 2:
             x = 1280 - 78
-        classes.HelmetFish(x, 130, 78, 36, "images/helmetfish.png")
+        classes.HelmetFish(x, 130, "images/helmetfish.png")
 
 def collisions():
     for helmetfish in classes.HelmetFish.List:
