@@ -6,6 +6,10 @@ def process(narwhal, FPS, total_frames):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_e:
+                    classes.Projectile.fire = not classes.Projectile.fire
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_d]:
@@ -24,13 +28,26 @@ def process(narwhal, FPS, total_frames):
         narwhal.velx = 0
         narwhal.vely = 0
 
-    if keys[pygame.K_SPACE] and classes.Narwhal.going_right == True:
-        p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, "images/projectiles/simple_shock.png")
-        p.velx = 8
-    elif keys[pygame.K_SPACE]:
-        p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, "images/projectiles/simple_shock.png")
-        p.image = pygame.transform.flip(p.image, True, False)
-        p.velx = -8
+    if keys[pygame.K_SPACE]:
+        def direction(p):
+            if classes.Narwhal.going_right:
+                p.velx = 8
+            else:
+                p.velx = -8
+                p.image = pygame.transform.flip(p.image, True, False)
+
+        if classes.Projectile.fire and classes.Narwhal.going_right:
+            p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, "images/projectiles/simple_shock_fire.png")
+            direction(p)
+        elif not classes.Projectile.fire and classes.Narwhal.going_right:
+            p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, "images/projectiles/simple_shock.png")
+            direction(p)
+        elif not classes.Narwhal.going_right and classes.Projectile.fire:
+            p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, "images/projectiles/simple_shock_fire.png")
+            direction(p)
+        else:
+            p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, "images/projectiles/simple_shock.png")
+            direction(p)
 
     spawn(FPS, total_frames)
 

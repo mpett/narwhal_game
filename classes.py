@@ -46,7 +46,7 @@ class HelmetFish(BaseClass):
         BaseClass.__init__(self, x, y, image_string)
         HelmetFish.List.add(self)
         self.health = 100
-        self.half_health = self.health / 5.0
+        self.half_health = self.health / 2
         self.velx = randint(1, 4)
         self.amplitude, self.period = randint(20, 320), randint(4, 6) / 100.0
 
@@ -73,6 +73,7 @@ class Projectile(pygame.sprite.Sprite):
 
     List = pygame.sprite.Group()
     normal_list = []
+    fire = True
     def __init__(self, x, y, image_string):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(image_string)
