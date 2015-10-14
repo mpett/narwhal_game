@@ -37,16 +37,16 @@ def process(narwhal, FPS, total_frames):
                 p.image = pygame.transform.flip(p.image, True, False)
 
         if classes.Projectile.fire and classes.Narwhal.going_right:
-            p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, "images/projectiles/simple_shock_fire.png")
+            p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, True, "images/projectiles/simple_shock_fire.png")
             direction(p)
         elif not classes.Projectile.fire and classes.Narwhal.going_right:
-            p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, "images/projectiles/simple_shock.png")
+            p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, False, "images/projectiles/simple_shock.png")
             direction(p)
         elif not classes.Narwhal.going_right and classes.Projectile.fire:
-            p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, "images/projectiles/simple_shock_fire.png")
+            p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, True, "images/projectiles/simple_shock_fire.png")
             direction(p)
         else:
-            p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, "images/projectiles/simple_shock.png")
+            p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, False, "images/projectiles/simple_shock.png")
             direction(p)
 
     spawn(FPS, total_frames)
@@ -61,22 +61,19 @@ def spawn(FPS, total_frames):
         classes.HelmetFish(x, 130, "images/helmetfish.png")
 
 def collisions():
-
-    # freezing
-    # shooting problem
-
     for helmetfish in classes.HelmetFish.List:
-        if pygame.sprite.spritecollide(helmetfish, classes.Projectile.List, False):
-            if classes.Projectile.fire:
-                helmetfish.health -= helmetfish.half_health
+        projectiles = pygame.sprite.spritecollide(helmetfish, classes.Projectile.List, True)
+        for projectile in projectiles:
+            helmetfish.health = 0
+            if projectile.if_this_variable_is_true_then_fire:
+                helmetfish.image = pygame.image.load("images/burnt_helmetfish.png")
             else:
-                helmetfish.velx = 0
-                # image of frozen helmetfish
-
-    for projectile in classes.Projectile.List:
-        if pygame.sprite.spritecollide(projectile, classes.HelmetFish.List, False):
-            projectile.rect.x = 2 *- projectile.rect.width
+                if helmetfish.velx > 0:
+                    helmetfish.image = pygame.image.load("images/frozen_helmetfish.png")
+                elif helmetfish.velx > 0:
+                    helmetfish.image = pygame.image.load("images/frozen_helmetfish.png")
+                    helmetfish.image = pygame.transform.flip(helmetfish.image, True, False)
+            projectile.rect.x = 2 * -projectile.rect.width
             projectile.destroy()
-
 
 

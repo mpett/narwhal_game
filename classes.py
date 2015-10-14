@@ -3,7 +3,6 @@ import math
 import classes
 from random import randint
 
-
 class BaseClass(pygame.sprite.Sprite):
     all_sprites = pygame.sprite.Group()
 
@@ -46,16 +45,18 @@ class HelmetFish(BaseClass):
         BaseClass.__init__(self, x, y, image_string)
         HelmetFish.List.add(self)
         self.health = 100
-        self.half_health = self.health / 2
-        self.velx = randint(1, 4)
+        self.half_health = self.health / 6.0
+        self.velx, self.vely = randint(1, 4), 2
         self.amplitude, self.period = randint(20, 320), randint(4, 6) / 100.0
 
     @staticmethod
-    def update_all(SCREENWIDTH):
+    def update_all(SCREENWIDTH, SCREENHEIGHT):
         for helmetfish in HelmetFish.List:
-            helmetfish.swim(SCREENWIDTH)
             if helmetfish.health <= 0:
-                helmetfish.destroy(HelmetFish)
+                #helmetfish.velx = 0
+                helmetfish.rect.y += helmetfish.vely
+            else:
+                helmetfish.swim(SCREENWIDTH)
 
     def swim(self, SCREENWIDTH):
         if self.rect.x + self.rect.width > SCREENWIDTH or self.rect.x < 0:
@@ -70,16 +71,16 @@ class HelmetFish(BaseClass):
             fish.swim(SCREENWIDTH)
 
 class Projectile(pygame.sprite.Sprite):
-
     List = pygame.sprite.Group()
     normal_list = []
     fire = True
-    def __init__(self, x, y, image_string):
+    def __init__(self, x, y, if_this_variable_is_true_then_fire, image_string):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(image_string)
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.if_this_variable_is_true_then_fire = if_this_variable_is_true_then_fire
 
         try:
             last_element = Projectile.normal_list[-1]

@@ -4,5 +4,8 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="support_vector_machines" />
+    <orderEntry type="module" module-name="decision_trees" />
+    <orderEntry type="module" module-name="boosting" />
   </component>
 </module>

@@ -27,8 +27,9 @@ while True:
     narwhal1.motion(SCREENWIDTH)
     HelmetFish.movement(SCREENWIDTH)
     Projectile.movement()
+    HelmetFish.update_all(SCREENWIDTH, SCREENHEIGHT)
     collisions()
-    HelmetFish.update_all(SCREENWIDTH)
+
     total_frames += 1
 
     #Draw
