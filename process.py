@@ -6,12 +6,10 @@ def process(narwhal, FPS, total_frames):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_e:
                     classes.Projectile.fire = not classes.Projectile.fire
     keys = pygame.key.get_pressed()
-
     if keys[pygame.K_d]:
         classes.Narwhal.going_right = True
         narwhal.image = pygame.image.load("images/single_narwhal.png")
@@ -27,7 +25,6 @@ def process(narwhal, FPS, total_frames):
     else:
         narwhal.velx = 0
         narwhal.vely = 0
-
     if keys[pygame.K_SPACE]:
         def direction(p):
             if classes.Narwhal.going_right:
@@ -35,7 +32,6 @@ def process(narwhal, FPS, total_frames):
             else:
                 p.velx = -16
                 p.image = pygame.transform.flip(p.image, True, False)
-
         if classes.Projectile.fire and classes.Narwhal.going_right:
             p = classes.Projectile(narwhal.rect.x + 261, narwhal.rect.y, True, "images/projectiles/simple_shock_fire.png")
             direction(p)
@@ -48,7 +44,6 @@ def process(narwhal, FPS, total_frames):
         else:
             p = classes.Projectile(narwhal.rect.x - 60, narwhal.rect.y, False, "images/projectiles/simple_shock.png")
             direction(p)
-
     spawn(FPS, total_frames)
 
 def spawn(FPS, total_frames):
@@ -75,5 +70,3 @@ def collisions():
                     helmetfish.image = pygame.transform.flip(helmetfish.image, True, False)
             projectile.rect.x = 2 * -projectile.rect.width
             projectile.destroy()
-
-

@@ -1,6 +1,4 @@
-import pygame
-import math
-import classes
+import pygame, math
 from random import randint
 
 class BaseClass(pygame.sprite.Sprite):
